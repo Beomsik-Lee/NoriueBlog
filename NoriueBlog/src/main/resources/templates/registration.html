@@ -5,6 +5,7 @@
 </head>
 <body>
 	<h1>Registration</h1>
+	<h3 th:if="${userAlreadyExist != null}" th:text="${userAlreadyExist}"></h3>
 	<form th:action="@{/user/registration}" th:object="${user}" method="POST">
 	    <div>
 	        <label>first</label>

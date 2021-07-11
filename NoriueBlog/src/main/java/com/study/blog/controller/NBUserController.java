@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.study.blog.exception.UserAlreadyExistException;
 import com.study.blog.model.UserDto;
 import com.study.blog.service.NBUserService;
 
@@ -48,7 +49,12 @@ public class NBUserController {
 			return "registration";
 		}
 		
-        userService.registerNewUserAccount(user);
+        try {
+        	userService.registerNewUserAccount(user);
+        } catch(UserAlreadyExistException e) {
+        	model.addAttribute("userAlreadyExist", e.getMessage());
+        	return "registration";
+        }
         
         return "redirect:/";
 	}
