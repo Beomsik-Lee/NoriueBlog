@@ -4,7 +4,6 @@ import javax.validation.constraints.NotEmpty;
 
 import com.study.blog.validator.PasswordMatches;
 import com.study.blog.validator.ValidEmail;
-import com.sun.istack.NotNull;
 
 /**
  * The user DTO
@@ -13,23 +12,19 @@ import com.sun.istack.NotNull;
  */
 @PasswordMatches
 public class UserDto {
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message = "First name may not be empty")
     private String firstName;
     
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Last name may not be empty")
     private String lastName;
     
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Password may not be empty")
     private String password;
     
     private String matchingPassword;
     
     @ValidEmail
-    @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Email may not be empty")
     private String email;
 
 	public String getFirstName() {
@@ -71,6 +66,4 @@ public class UserDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-    
-    
 }

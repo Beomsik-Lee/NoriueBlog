@@ -1,36 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registration</title>
+</head>
 <body>
 	<h1>Registration</h1>
-	<form th:action="@{/user/registration}" th:object="${user}" method="POST" enctype="utf8">
+	<form th:action="@{/user/registration}" th:object="${user}" method="POST">
 	    <div>
 	        <label>first</label>
 	        <input th:field="*{firstName}"/>
-	        <p th:each="error: ${#fields.errors('firstName')}" 
-	          th:text="${error}">Validation error</p>
+	        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
 	    </div>
 	    <div>
 	        <label>last</label>
 	        <input th:field="*{lastName}"/>
-	        <p th:each="error : ${#fields.errors('lastName')}" 
-	          th:text="${error}">Validation error</p>
+	        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
 	    </div>
 	    <div>
 	        <label>email</label>
 	        <input type="email" th:field="*{email}"/>
-	        <p th:each="error : ${#fields.errors('email')}" 
-	          th:text="${error}">Validation error</p>
+	        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
 	    </div>
 	    <div>
 	        <label>password</label>
 	        <input type="password" th:field="*{password}"/>
-	        <p th:each="error : ${#fields.errors('password')}" 
-	          th:text="${error}">Validation error</p>
+	        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
 	    </div>
 	    <div>
 	        <label>confirm</label>
 	        <input type="password" th:field="*{matchingPassword}"/>
+	        <span th:if="${#fields.hasErrors('${user}')}" th:errors="${user}"></span>
 	    </div>
 	    <button type="submit">submit</button>
 	</form>
